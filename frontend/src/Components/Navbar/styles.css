@@ -1,0 +1,23 @@
+.navlinks {
+    display: "flex";
+}
+
+/* .link {
+    textDecoration: "none",
+        color: '#363D21',
+        fontSize: "17px",
+        fontWeight: "bold",
+        marginLeft: 40,
+} */
+
+.navbar-background {
+    background-color: #99be92;
+    font-size: larger;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.rightside{
+    color: black;
+}
+
