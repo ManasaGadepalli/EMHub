@@ -11,7 +11,8 @@ export default function NavBar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto"></Nav>
                     <Nav id="">
-                        <Nav.Link id="rightside" href="/login" >Login</Nav.Link>
+                        <Nav.Link href="/search">Search</Nav.Link>
+                        <Nav.Link href="/login" >Login</Nav.Link>
                         <Nav.Link href="/signup">Sign Up</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
