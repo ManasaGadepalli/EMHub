@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql2.createConnection({
   user: "root",
   host: "localhost",
-  password: "Sgadepalli@070",
+  password: "Sharat1loveyou!",
   database: "project157a",
 
 
@@ -26,20 +26,7 @@ app.post('/signup', (req, res) => {
   const reenterpassword = req.body.reenterpassword;
 
   db.query('INSERT INTO users (firstname,lastname,email,phone,password,reenterpassword) VALUES (?,?,?,?,?,?)',
-<<<<<<< HEAD
-    [firstname, lastname, email, phone, password, reenterpassword], (err, result) => {
 
-      if (err) {
-        console.log(err)
-      }
-      else {
-        res.send('values inserted')
-      }
-
-    }
-  )
-})
-=======
   [firstname,lastname,email,phone,password,reenterpassword], (err, result) =>{
     
     if (err)
@@ -69,7 +56,6 @@ app.post('/login', (req, res) => {
       res.send({message: "wrong email/password combination"});
     } })
 });
->>>>>>> 0fb7bf43abdafd205b9c1671ca1f60eb433de212
 
 app.listen(3001, () => { // should be different port
   console.log("running on port 3001");
