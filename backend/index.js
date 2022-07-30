@@ -1,3 +1,5 @@
+
+
 const express = require("express");
 const app = express();
 const mysql2 = require('mysql2');
@@ -29,10 +31,11 @@ app.post('/signup', (req, res) => {
 
   [firstname,lastname,email,phone,password,reenterpassword], (err, result) =>{
     
-    if (err)
+    if (err.code =='ER_DUP_ENTRY')
     {
-      console.log(err)
+      res.send({message: "This email already exists, please login or try different email"});
     }
+
     else{
       res.send('values inserted')
     }})
@@ -52,6 +55,7 @@ app.post('/login', (req, res) => {
 
     if(result.length > 0){
       res.send(result);
+      
     } else {
       res.send({message: "wrong email/password combination"});
     } })

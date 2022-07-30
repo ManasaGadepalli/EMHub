@@ -13,6 +13,7 @@ export default function SignUpPage() {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [reenterpassword, setReEnterdPassword] = useState('');
+    const [regstatus, setregstatus] = useState('');
 
 
     const reguser = () =>
@@ -25,9 +26,16 @@ export default function SignUpPage() {
             password:password,
             reenterpassword:reenterpassword,
 
-        }).then(() =>{
-            console.log("success");
-            window.location.replace("/login");
+        }).then((response) =>{
+
+            if(response.data.message) {
+                setregstatus(response.data.message)
+            }
+            else{
+                console.log("success");
+                window.location.replace("/login");
+            }
+          
         }) ;
     };
     
@@ -79,6 +87,7 @@ export default function SignUpPage() {
                     </Form.Group>
                  
                 </Form>
+                <div className="error">{regstatus}</div>
                 <br />
             </Container>
         </div >
