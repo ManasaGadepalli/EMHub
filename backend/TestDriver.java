@@ -17,18 +17,18 @@ public class TestDriver {
         }
         try {
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/project157a", "root",
-                    "123456");
-
-            Statement stm = c.createStatement();
-            String sql = "CREATE TABLE USER" +
-                    "(id INTEGER not NULL," +
-                    "first VARCHAR(255)," +
-                    "last  VARCHAR(255)," +
-                    "age  INTEGER," +
-                    "PRIMARY KEY (id))";
-            stm.executeLargeUpdate(sql);
-            System.out.println("Created table in the database");
-
+                    "Sgadepalli@070");
+            /*
+             * Statement stm = c.createStatement();
+             * String sql = "CREATE TABLE USER" +
+             * "(id INTEGER not NULL," +
+             * "first VARCHAR(255)," +
+             * "last  VARCHAR(255)," +
+             * "age  INTEGER," +
+             * "PRIMARY KEY (id))";
+             * stm.executeLargeUpdate(sql);
+             * System.out.println("Created table in the database");
+             */
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
