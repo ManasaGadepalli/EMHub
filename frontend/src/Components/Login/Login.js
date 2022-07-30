@@ -25,7 +25,6 @@ export default function LoginPage() {
                 localStorage.setItem("email", email);
                 window.location.replace("/search");
                 }
-            
         });
     };
 

@@ -30,6 +30,7 @@ export default function SignUpPage() {
             window.location.replace("/login");
         }) ;
     };
+    
    
     return (
         <div>
