@@ -34,14 +34,10 @@ app.post('/signup', (req, res) => {
     }
     else{
       res.send('values inserted')
-    }
-
-  }
-  )
+    }})
 })
 
 app.post('/login', (req, res) => {
-
   const email =req.body.email;
   const password =req.body.password;
   
@@ -53,16 +49,11 @@ app.post('/login', (req, res) => {
       res.send({err: err});
     }
 
-
-
     if(result.length > 0){
       res.send(result);
     } else {
       res.send({message: "wrong email/password combination"});
-    }
-
-  }
-  )
+    } })
 });
 
 app.listen(3001, ()=>{ // should be different port
