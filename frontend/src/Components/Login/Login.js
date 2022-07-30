@@ -2,48 +2,40 @@ import NavBar from "../Navbar/Navbar";
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './Login.css';
+import Axios from 'axios';
+//import { Response, serve, createServer } from 'react-response'
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginStatus,setloginStatus] =useState('');
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log("Email: " + email);
-        console.log("Password: " + password);
+    const login = () =>
+    {
+        Axios.post("http://localhost:3001/login", {
+            email:email,
+            password:password,
+        }).then((response) => {
 
-        let userData = {
-            email: email,
-            password: password,
-        }
-
-        fetch("http://127.0.0.1:5000/login_user", {
-            method: 'POST',
-            body: JSON.stringify(userData),
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+            if(response.data.message) {
+                setloginStatus(response.data.message)
             }
-        })
-            .then(data => {
-                if (data.status !== 200)
-                    alert("Error: Please make sure you entered the correct email and password.")
-                else {
-                    console.log("Successfully logged in!");
-                    localStorage.setItem("email", email);
-                    window.location.replace("/findTextbooks");
+            else {
+                console.log("Successfully logged in!");
+                localStorage.setItem("email", email);
+                window.location.replace("/search");
                 }
-            })
-            .catch(function (error) {
-                console.log("Fetch error: " + error);
-            });
-    }
+            
+        });
+    };
+
+   
     return (
         <div className="background">
             <NavBar />
             <div className="loginbox">
                 <div className="loginHeader">LOGIN</div>
-                <Form className='formContainerLogin' onSubmit={onSubmit}>
+                <Form className='formContainerLogin'>
                     <Form.Group>
                         <Form.Label >
                              Email:
@@ -68,8 +60,10 @@ export default function LoginPage() {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Button type="login_button">Login</Button>
+                    <Button  onClick={login} >Login</Button>
+                    
                 </Form>
+                <div className="error">{loginStatus}</div>
             </div>
         </div >
     );

@@ -1,4 +1,3 @@
-
 import NavBar from "../Navbar/Navbar";
 import './Registration.css';
 import { useState } from 'react';
@@ -28,81 +27,10 @@ export default function SignUpPage() {
 
         }).then(() =>{
             console.log("success");
+            window.location.replace("/login");
         }) ;
     };
-    /*const [email, setEmail] = useState('');
-    const [emailErr, setEmailErr] = useState(false);
-    const [passwordErr, setPasswordErr] = useState(false);
-    const validate = (e) => {
-        e.preventDefault();
-        let valid = true;
-        setEmailErr(false); 
-        setPasswordErr(false);
-
-        if (!validEmail.test(email)) {
-            setEmailErr(true);
-            valid = false;
-        }
-
-        if (password !== reenterdpasssword) {
-            setPasswordErr(true);
-            valid = false;
-        }
-
-        if (valid === true) {
-            onSubmit(e);
-        }
-    }
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-
-    const [phone, setPhone] = useState('');
-    const [password, setPassword] = useState('');
-    const [reenterdpasssword, setReEnterdPassword] = useState('');
-
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log("FirstName: " + firstname);
-        console.log("LastName: " + lastname);
-        console.log("Email: " + email);
-        console.log("Phone: " + phone);
-        console.log("Password: " + password);
-        console.log("ReEnter: " + reenterdpasssword);
-        // Add a POST method to backend to create user.
-
-        let userData = {
-            email: email,
-            password: password,
-            firstName: firstname,
-            lastName: lastname,
-            phoneNum: phone,
-        }
-
-        if (password === reenterdpasssword) {
-            fetch("http://127.0.0.1:5000/register_user", {
-                method: 'POST',
-                body: JSON.stringify(userData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-                .then(data => {
-                    if (data.status !== 200)
-                        alert("Having error")
-                    else {
-                        alert("Your account was successfully created!");
-                        window.location.replace("/login");
-                    }
-                })
-                .catch(function (error) {
-                    console.log("Fetch error: " + error);
-                });
-        } else {
-            console.log("Please make sure your passwords are matching.")
-        }
-    }*/
+   
     return (
         <div>
             <NavBar />

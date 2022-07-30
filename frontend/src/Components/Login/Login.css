@@ -48,3 +48,9 @@
 .loginbox Button:hover {
     background-color: #5F7D5A;
 }
+
+.error{
+    
+    color: rgb(95, 8, 8);
+    
+}
