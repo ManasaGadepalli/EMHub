@@ -26,6 +26,7 @@ app.post('/signup', (req, res) => {
   const reenterpassword = req.body.reenterpassword;
 
   db.query('INSERT INTO users (firstname,lastname,email,phone,password,reenterpassword) VALUES (?,?,?,?,?,?)',
+<<<<<<< HEAD
     [firstname, lastname, email, phone, password, reenterpassword], (err, result) => {
 
       if (err) {
@@ -38,6 +39,37 @@ app.post('/signup', (req, res) => {
     }
   )
 })
+=======
+  [firstname,lastname,email,phone,password,reenterpassword], (err, result) =>{
+    
+    if (err)
+    {
+      console.log(err)
+    }
+    else{
+      res.send('values inserted')
+    }})
+})
+
+app.post('/login', (req, res) => {
+  const email =req.body.email;
+  const password =req.body.password;
+  
+  db.query('SELECT * FROM users WHERE email = ? AND password = ?',
+  [email,password],
+  (err, result) =>{
+    if (err)
+    {
+      res.send({err: err});
+    }
+
+    if(result.length > 0){
+      res.send(result);
+    } else {
+      res.send({message: "wrong email/password combination"});
+    } })
+});
+>>>>>>> 0fb7bf43abdafd205b9c1671ca1f60eb433de212
 
 app.listen(3001, () => { // should be different port
   console.log("running on port 3001");
