@@ -3,16 +3,40 @@ import NavBar from "../Navbar/Navbar";
 import './Registration.css';
 import { useState } from 'react';
 import { Container, Form, Button, Row } from 'react-bootstrap';
-import { validEmail } from './RegExp.js';
+//import axios, { Axios } from "axios";
+//import { validEmail } from './RegExp.js';
+import Axios from 'axios';
 
 export default function SignUpPage() {
+    const [lastname, setLastname] = useState('');
+    const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [reenterpassword, setReEnterdPassword] = useState('');
+
+
+    const reguser = () =>
+    {
+        Axios.post("http://localhost:3001/signup", {
+            lastname:lastname,
+            firstname:firstname,
+            email:email,
+            phone:phone,
+            password:password,
+            reenterpassword:reenterpassword,
+
+        }).then(() =>{
+            console.log("success");
+        }) ;
+    };
+    /*const [email, setEmail] = useState('');
     const [emailErr, setEmailErr] = useState(false);
     const [passwordErr, setPasswordErr] = useState(false);
     const validate = (e) => {
         e.preventDefault();
         let valid = true;
-        setEmailErr(false);
+        setEmailErr(false); 
         setPasswordErr(false);
 
         if (!validEmail.test(email)) {
@@ -78,7 +102,7 @@ export default function SignUpPage() {
         } else {
             console.log("Please make sure your passwords are matching.")
         }
-    }
+    }*/
     return (
         <div>
             <NavBar />
@@ -86,7 +110,7 @@ export default function SignUpPage() {
                 <br />
                 <h2 id="content">Create Your Account</h2>
                 <br />
-                <Form className='form' onSubmit={validate}>
+                <Form className='form'>
                     <Row className='row'>
                         <Form.Group className="col-md-4" controlId='firstName'>
                             <Form.Label>First Name</Form.Label>
@@ -117,15 +141,14 @@ export default function SignUpPage() {
 
                         <Form.Group className="col-md-4" controlId='confirm'>
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type='password' required value={reenterdpasssword} onChange={e => setReEnterdPassword(e.target.value)} placeholder='Confirm Password' />
+                            <Form.Control type='password' required value={reenterpassword} onChange={e => setReEnterdPassword(e.target.value)} placeholder='Confirm Password' />
                         </Form.Group>
                     </Row>
                     <br />
                     <Form.Group className="regbtngroup">
-                        <Button className="regbtn" type='submit'> <b>Create Account</b></Button>
+                        <Button className="regbtn" type='button' onClick={reguser}> <b>Create Account</b></Button>
                     </Form.Group>
-                    {emailErr && <p className="error">Your email is invalid, please enter a SJSU email.</p>}
-                    {passwordErr && <p className="error">Please make sure your passwords are matching.</p>}
+                 
                 </Form>
                 <br />
             </Container>
