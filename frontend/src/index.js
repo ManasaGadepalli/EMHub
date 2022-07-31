@@ -4,7 +4,8 @@ import App from './App';
 //import ListingForm from './Components/ListingForm/listingForm';
 import LoginPage from './Components/Login/Login';
 import SignUpPage from './Components/Registration/Registration';
-import Search from './Components/Searchpage/NewSearch';
+//import Search from './Components/Searchpage/NewSearch';
+import Search from './Components/Searchpage/Search';
 //import FindTextbooks from './Components/FindTextbooks/findTextbooks';
 //import ManageListings from './Components/ManageListings/manageListings';
 //import EditListing from './Components/ManageListings/editListing';
@@ -18,7 +19,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path='/' component={App} />
       <Route exact path='/login' component={LoginPage} />
-      <Route exact path='/search' component={Search}/>
+      <Route exact path='/search' component={Search} />
       <Route exact path='/signup' component={SignUpPage} />
     </Switch>
   </BrowserRouter>,
