@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql2.createConnection({
   user: "root",
   host: "localhost",
-  password: "Sgadepalli@070",
+  password: "Sharat1loveyou!",
   database: "project157a",
 
 
@@ -29,8 +29,8 @@ app.post('/signup', (req, res) => {
 
     [firstname, lastname, email, phone, password, reenterpassword], (err, result) => {
 
-      if (err.code == 'ER_DUP_ENTRY') {
-        res.send({ message: "This email already exists, please login or try different email" });
+      if (err) {
+      console.log(err);
       }
 
       else {

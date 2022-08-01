@@ -1,6 +1,12 @@
 //import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
+import { Card } from "react-bootstrap";
+import './styles.css';
+import NavBar from "../Navbar/Navbar";
+import React, { useEffect } from "react";
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Container, Form, Row, Button } from 'react-bootstrap';
 
 function Search() {
     const [comp_name, setName] = useState("");
@@ -9,10 +15,15 @@ function Search() {
     const [rating, setRating] = useState(0);
     const [minprice, setMinPrice] = useState(0);
     const [email, setEmail] = useState("");
+    const [searchBy, setSearchBy] = React.useState('comp_name');
 
     const [newMinPrice, setNewMinPrice] = useState(0);
+    const [searchInput, setSearchInput] = useState(location? location: "")
 
     const [compList, setCompList] = useState([]);
+    const [direction, setDirection] = useState(1)
+
+    
 
     const addCompany = () => {
         Axios.post("http://localhost:3001/create", {
@@ -78,90 +89,49 @@ function Search() {
 
     return (
         <div className="App">
-            <div className="information">
-                <label>Name:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setName(event.target.value);
-                    }}
-                />
-                <label>Event Type:</label>
-                <input
-                    type="number"
-                    onChange={(event) => {
-                        setType(event.target.value);
-                    }}
-                />
-                <label>Location:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setLocation(event.target.value);
-                    }}
-                />
-                <label>Rating:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setRating(event.target.value);
-                    }}
-                />
-                <label>Min Price:</label>
-                <input
-                    type="number"
-                    onChange={(event) => {
-                        setMinPrice(event.target.value);
-                    }}
-                />
-                <label>Email:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setEmail(event.target.value);
-                    }}
-                />
-                <button onClick={addCompany}>Add Event Companies</button>
-            </div>
+             <NavBar />
+             <div>
+           <DropdownButton className="buttonStyle" title="Sort" variant='dark' >
+            <Dropdown.Item onClick = {() => setDirection(1)}>Low to High</Dropdown.Item>
+            <Dropdown.Item onClick = {() => setDirection(-1)}>High to Low</Dropdown.Item>
+            <Dropdown.Item onClick={(event) => { setSearchBy("event_type")}} >Search by name</Dropdown.Item> 
+            <Dropdown.Item onClick={(event) => { setSearchBy("event_type")}} >Rating</Dropdown.Item> 
+          </DropdownButton>
+
+            <Container >
+            <Form.Group  controlId='Label'>
+            <Form.Control
+              type='label'
+              onChange={(s) => setSearchInput(s.target.value)}
+              placeholder='✈️ Enter Location' />
+            </Form.Group>
+            <Button className="searchButton"> Go </Button>
+            </Container>
+            
+    </div>
             <div className="employees">
-                <button onClick={getCompanies}>Show Event Companies</button>
+          
+                <button className="showcompanies"   onClick={getCompanies}>Show Event Companies</button>
 
                 {compList.map((val, key) => {
                     return (
                         <div className="Companies">
-                            <div>
-                                <h3>CompName: {val.comp_name}</h3>
-                                <h3>Event_type: {val.event_type}</h3>
-                                <h3>Location: {val.location}</h3>
-                                <h3>Rating: {val.rating}</h3>
-                                <h3>MinPrice: {val.minprice}</h3>
-                                <h3>Email: {val.email}</h3>
-                            </div>
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="2000..."
-                                    onChange={(event) => {
-                                        setNewMinPrice(event.target.value);
-                                    }}
-                                />
-                                <button
-                                    onClick={() => {
-                                        updateMinPrice(val.id);
-                                    }}
-                                >
-                                    {" "}
-                                    Update
-                                </button>
+                            <Card style = {{width: '50vh',margin:'1vh',padding:'1vh',height:'contentfit', marginLeft:'7vh'}}>
+                             <br/>
+                            <Card.Body style = {{color: '#000229', fontSize: '15px',fontFamily: 'Calibri', textAlign:'left',margin:'0vh',padding:'0vh'}}>
+                            <Card.Title style ={{fontWeight:'bold', fontSize:"20px", color: '#0b0b64'}}> {val.comp_name}</Card.Title>
+                                Event_type: {val.event_type}&nbsp;
+                                <br/>
+                                Location: {val.location} &nbsp;
+                                <br/>
+                                MinPrice: ${val.minprice + ""} &nbsp;
+                                 <br/>
+                                 Email: ${val.email + ""} &nbsp;
+                                 <br/>
+                                Rating: {val.rating/10 }/5 
+                                 </Card.Body>
+                                </Card>
 
-                                <button
-                                    onClick={() => {
-                                        deleteCompany(val.id);
-                                    }}
-                                >
-                                    Delete
-                                </button>
-                            </div>
                         </div>
                     );
                 })}
