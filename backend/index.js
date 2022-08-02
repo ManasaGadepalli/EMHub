@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql2.createConnection({
   user: "root",
   host: "localhost",
-  password: "Sharat1loveyou!",
+  password: "Sgadepalli@070",
   database: "project157a",
 
 
@@ -30,7 +30,7 @@ app.post('/signup', (req, res) => {
     [firstname, lastname, email, phone, password, reenterpassword], (err, result) => {
 
       if (err) {
-      console.log(err);
+        console.log(err);
       }
 
       else {
