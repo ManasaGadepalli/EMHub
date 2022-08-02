@@ -91,6 +91,18 @@ app.get("/event_companies", (req, res) => {
   });
 });
 
+app.get("/location", (req, res) => {
+  const location = req.body.location;
+  db.query("SELECT * FROM event_companies WHERE location =?", [location], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
 
 app.listen(3001, () => { // should be different port
   console.log("running on port 3001");

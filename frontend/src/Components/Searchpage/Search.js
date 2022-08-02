@@ -18,10 +18,12 @@ function Search() {
     const [searchBy, setSearchBy] = React.useState('comp_name');
 
     const [newMinPrice, setNewMinPrice] = useState(0);
-    const [searchInput, setSearchInput] = useState(location? location: "")
-
+    const [searchevent, setsearchevent] = useState("")
+    const [searchterm, setsearchterm] = useState("")
     const [compList, setCompList] = useState([]);
     const [direction, setDirection] = useState(1)
+    const [searchResult, setSearchResult] = useState([])
+
 
     
 
@@ -48,11 +50,21 @@ function Search() {
         });
     };
 
-    const getCompanies = () => {
-        Axios.get("http://localhost:3001/event_companies").then((response) => {
-            setCompList(response.data);
-        });
-    };
+        const getCompanies = () => {
+            Axios.get("http://localhost:3001/event_companies").then((response) => {
+                setCompList(response.data);
+                
+            });
+        };
+
+       
+
+        const getCompaniesbylocation = (searchInput) => {
+            Axios.get("http://localhost:3001/location").then((response) => {
+                setCompList(response.data);
+            });
+          };
+    
 
     const updateMinPrice = (id) => {
         Axios.put("http://localhost:3001/update", { minprice: newMinPrice, id: id }).then(
@@ -76,17 +88,10 @@ function Search() {
         );
     };
 
-    const deleteCompany = (id) => {
-        Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
-            setCompList(
-                compList.filter((val) => {
-                    return val.id != id;
-                })
-            );
-        });
-    };
+ 
 
 
+   
     return (
         <div className="App">
              <NavBar />
@@ -98,22 +103,30 @@ function Search() {
             <Dropdown.Item onClick={(event) => { setSearchBy("event_type")}} >Rating</Dropdown.Item> 
           </DropdownButton>
 
-            <Container >
-            <Form.Group  controlId='Label'>
-            <Form.Control
-              type='label'
-              onChange={(s) => setSearchInput(s.target.value)}
-              placeholder='✈️ Enter Location' />
-            </Form.Group>
-            <Button className="searchButton"> Go </Button>
-            </Container>
+           
             
     </div>
             <div className="employees">
+                <Container >
+                <Form.Group  controlId='Label'>
+                <Form.Control
+                type='label' onChange={event => {setsearchterm(event.target.value)}}
+                placeholder='✈️ Enter Location' />
+                </Form.Group>
+                 </Container>
           
                 <button className="showcompanies"   onClick={getCompanies}>Show Event Companies</button>
 
-                {compList.map((val, key) => {
+                {compList.filter((val)=>{
+                    if (searchterm =="")
+                    {
+                        return val;
+                    }
+                    else if(val.location.toLowerCase().includes(searchterm.toLowerCase())){
+                        return val;
+                    }
+                    
+                }).map((val, key) => {
                     return (
                         <div className="Companies">
                             <Card style = {{width: '50vh',margin:'1vh',padding:'1vh',height:'contentfit', marginLeft:'7vh'}}>
