@@ -1,25 +1,35 @@
-.showcompanies{
+.showcompanies {
     margin: 3%;
     margin-left: 40%;
 }
 
-.Companies{
+.Companies {
     margin: 0%;
     margin-left: 30%;
 }
 
-.buttonStyle{
+.buttonStyle {
     margin: 1%;
     margin-left: 1%;
     margin-top: 1%;
 }
 
-.searchButton{
+.searchButton {
     margin: "1px";
     width: "10%";
-    height:'10%';
+    height: '10%';
     color: #0a3e56;
     color: '#000000';
     margin-top: 1%;
     margin-left: 40%;
+}
+
+.dropdown {
+
+    margin-left: 30%;
+}
+
+.searchContainer {
+
+    margin-top: 3%;
 }
