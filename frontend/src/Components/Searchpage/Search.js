@@ -121,6 +121,14 @@ function Search() {
                     </Form.Group>
                 </Container>
 
+                <Container >
+                <Form.Group  controlId='Label'>
+                <Form.Control
+                type='label' onChange={event => {setsearchevent(event.target.value)}}
+                placeholder='🎉 Enter Event Type' />
+                </Form.Group>
+                 </Container>
+
                 <button className="showcompanies" onClick={getCompanies}>Show Event Companies</button>
 
                 {compList.filter((val) => {
@@ -128,6 +136,14 @@ function Search() {
                         return val;
                     }
                     else if (val.location.toLowerCase().includes(searchterm.toLowerCase())) {
+                        return val;
+                    }
+                }).filter((val) => {
+                    if (searchevent =="")
+                    {
+                        return val;
+                    }
+                    else if(val.event_type.toLowerCase().includes(searchevent.toLowerCase())){
                         return val;
                     }
 

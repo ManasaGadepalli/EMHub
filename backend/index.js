@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql2.createConnection({
   user: "root",
   host: "localhost",
-  password: "Sgadepalli@070",
+  password: "jimmy123",
   database: "project157a",
 
 
@@ -94,6 +94,17 @@ app.get("/event_companies", (req, res) => {
 app.get("/location", (req, res) => {
   const location = req.body.location;
   db.query("SELECT * FROM event_companies WHERE location =?", [location], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get("/event_type", (req, res) => {
+  const event_type = req.body.event_type;
+  db.query("select * from event_companies where event_type LIKE %?%", [event_type], (err, result) => {
     if (err) {
       console.log(err);
     } else {
