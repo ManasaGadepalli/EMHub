@@ -1,5 +1,5 @@
 //import "./App.css";
-import "./Companies.js";
+//import "./Companies.js";
 import { useState } from "react";
 import Axios from "axios";
 import { Card } from "react-bootstrap";
